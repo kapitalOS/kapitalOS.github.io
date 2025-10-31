@@ -1,14 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html>
+<html lang="he">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Moon Values</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>מייק הקטן</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --accent:#ffd166;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:'Segoe UI',sans-serif;
+      background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.04), transparent 15%), linear-gradient(180deg,#07101a 0%, var(--bg) 100%);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }.card{
+  background:rgba(255,255,255,0.03);
+  border-radius:20px;
+  padding:22px;
+  border:2px solid transparent;
+  backdrop-filter:blur(6px);
+  box-shadow:0 6px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  max-width:420px;
+  z-index:2;
+}
+
+.frame{
+  width:340px;
+  height:340px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  padding:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  box-shadow:0 8px 30px rgba(0,0,0,0.6), 0 0 32px rgba(255,255,255,0.03);
+  border:2px solid rgba(255,255,255,0.04);
+  transform:rotate(-3deg);
+  animation:float 4s ease-in-out infinite;
+}
+
+.portrait{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:12px;
+  border:6px solid rgba(255,255,255,0.03);
+  box-shadow:0 12px 40px rgba(0,0,0,0.65);
+  filter:saturate(1.2) contrast(1.05);
+  transform-origin:center;
+  animation:wobble 2.6s ease-in-out infinite;
+}
+
+@keyframes wobble{
+  0%{transform:rotate(0deg) scale(1)}
+  25%{transform:rotate(1.5deg) scale(1.02)}
+  50%{transform:rotate(0deg) scale(1)}
+  75%{transform:rotate(-1.5deg) scale(0.99)}
+  100%{transform:rotate(0deg) scale(1)}
+}
+@keyframes float{
+  0%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-8px) rotate(-2deg)}
+  100%{transform:translateY(0) rotate(-3deg)}
+}
+
+h1{
+  font-size:36px;
+  margin:0;
+  text-align:center;
+  color:var(--accent);
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+}
+
+/* falling emoji */
+.emoji{
+  position:fixed;
+  top:-50px;
+  font-size:30px;
+  animation:fall linear infinite;
+  z-index:1;
+}
+
+@keyframes fall{
+  0%{transform:translateY(-50px) rotate(0deg);opacity:1;}
+  100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+
+@media(max-width:520px){
+  .frame{width:280px;height:280px;}
+  .card{max-width:320px;}
+}
+
+  </style>
 </head>
-<body style="background-color: black;">
-  <h1>
-    <div style="text-align: center; color:white;">מייק הקטן🥵</div>
-    <img src="https://cdn.discordapp.com/attachments/1410664022973485094/1418717842068738240/image.png?ex=6905d9b4&is=69048834&hm=0b1c8a2275235edd0706b585777ed9c8db6a8e31f52a8214026abf300f7ec6e3&">
-  </h1>
-</body>
+<body>
+  <div class="card">
+    <div class="frame">
+      <img class="portrait" src="https://cdn.discordapp.com/attachments/1410664022973485094/1418717842068738240/image.png?ex=6905d9b4&is=69048834&hm=0b1c8a2275235edd0706b585777ed9c8db6a8e31f52a8214026abf300f7ec6e3&" alt="מייק הקטן">
+    </div>
+    <h1>מייק הקטן</h1>
+  </div>  <script>
+    function createEmoji(){
+      const e = document.createElement('div');
+      e.className = 'emoji';
+      e.textContent = '🥵';
+      e.style.left = Math.random()*100 + 'vw';
+      e.style.animationDuration = (Math.random()*3+4) + 's';
+      document.body.appendChild(e);
+      setTimeout(()=> e.remove(),7000);
+    }
+    setInterval(createEmoji,400);
+  </script></body>
 </html>
